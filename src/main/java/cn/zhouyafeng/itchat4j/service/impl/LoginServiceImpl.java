@@ -201,16 +201,16 @@ public class LoginServiceImpl implements ILoginService {
 					core.getGroupIdList().add(chatSetArray[i]); //
 				}
 			}
-			// JSONArray contactListArray = obj.getJSONArray("ContactList");
-			// for (int i = 0; i < contactListArray.size(); i++) {
-			// JSONObject o = contactListArray.getJSONObject(i);
-			// if (o.getString("UserName").indexOf("@@") != -1) {
-			// core.getGroupIdList().add(o.getString("UserName")); //
-			// // 更新GroupIdList
-			// core.getGroupList().add(o); // 更新GroupList
-			// core.getGroupNickNameList().add(o.getString("NickName"));
-			// }
-			// }
+//			JSONArray contactListArray = obj.getJSONArray("ContactList");
+//			for (int i = 0; i < contactListArray.size(); i++) {
+//				JSONObject o = contactListArray.getJSONObject(i);
+//				if (o.getString("UserName").indexOf("@@") != -1) {
+//					core.getGroupIdList().add(o.getString("UserName")); //
+//					// 更新GroupIdList
+//					core.getGroupList().add(o); // 更新GroupList
+//					core.getGroupNickNameList().add(o.getString("NickName"));
+//				}
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

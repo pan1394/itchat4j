@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
 
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
@@ -17,6 +19,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.zhouyafeng.itchat4j.core.Core;
+import cn.zhouyafeng.itchat4j.utils.CommonUtils;
 import cn.zhouyafeng.itchat4j.utils.enums.StorageLoginInfoEnum;
 import cn.zhouyafeng.itchat4j.utils.enums.URLEnum;
 
@@ -168,7 +171,24 @@ public class WechatTools {
 		for (JSONObject o : core.getContactList()) {
 			core.getUserInfoMap().put(o.getString("NickName"), o);
 			core.getUserInfoMap().put(o.getString("UserName"), o);
+			core.getUserDisplayNameMap().put(o.getString("UserName"), CommonUtils.getName(o));
 		}
+		for(JSONObject o : core.getPublicUsersList()) {
+			core.getUserDisplayNameMap().put(o.getString("UserName"), CommonUtils.getName(o));
+		}
+		for(JSONObject o : core.getSpecialUsersList()) {
+			core.getUserDisplayNameMap().put(o.getString("UserName"), CommonUtils.getName(o));
+		}
+		for(Entry<String, JSONArray> m : core.getGroupMemeberMap().entrySet()) {
+			if(Objects.isNull(m.getValue())) continue;
+			JSONArray array = m.getValue();
+			for(int i=0; i< array.size(); i++) {
+				JSONObject o = array.getJSONObject(i);
+				core.getUserDisplayNameMap().put(o.getString("UserName"), CommonUtils.getName(o));
+			}
+			
+		}
+		
 	}
 
 	/**

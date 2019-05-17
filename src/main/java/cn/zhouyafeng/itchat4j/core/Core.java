@@ -58,6 +58,8 @@ public class Core {
 
 	private Map<String, JSONObject> userInfoMap = new HashMap<String, JSONObject>();
 
+	private Map<String, String> userDisplayNameMap = new HashMap<>(); //userName, 显示名map
+	
 	Map<String, Object> loginInfo = new HashMap<String, Object>();
 	// CloseableHttpClient httpClient = HttpClients.createDefault();
 	MyHttpClient myHttpClient = MyHttpClient.getInstance();
@@ -273,4 +275,13 @@ public class Core {
 		this.indexUrl = indexUrl;
 	}
 
+	public Map<String, String> getUserDisplayNameMap() {
+		return userDisplayNameMap;
+	}
+
+	public void setUserDisplayNameMap(Map<String, String> userDisplayNameMap) {
+		this.userDisplayNameMap = userDisplayNameMap;
+	}
+
+	
 }
