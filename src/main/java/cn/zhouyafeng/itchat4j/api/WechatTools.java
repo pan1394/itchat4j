@@ -179,6 +179,9 @@ public class WechatTools {
 		for(JSONObject o : core.getSpecialUsersList()) {
 			core.getUserDisplayNameMap().put(o.getString("UserName"), CommonUtils.getName(o));
 		}
+		for(JSONObject o : core.getGroupList()) {
+			core.getUserDisplayNameMap().put(o.getString("UserName"), CommonUtils.getName(o));
+		}
 		for(Entry<String, JSONArray> m : core.getGroupMemeberMap().entrySet()) {
 			if(Objects.isNull(m.getValue())) continue;
 			JSONArray array = m.getValue();
