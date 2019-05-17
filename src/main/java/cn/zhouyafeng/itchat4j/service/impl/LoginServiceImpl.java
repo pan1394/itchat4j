@@ -251,7 +251,9 @@ public class LoginServiceImpl implements ILoginService {
 				while (core.isAlive()) {
 					try {
 						Map<String, String> resultMap = syncCheck();
-						LOG.info(JSONObject.toJSONString(resultMap));
+						if(Integer.parseInt(resultMap.get("retcode")) != 0) {
+							LOG.warn(JSONObject.toJSONString(resultMap));
+						}
 						String retcode = resultMap.get("retcode");
 						String selector = resultMap.get("selector");
 						if (retcode.equals(RetCodeEnum.UNKOWN.getCode())) {
