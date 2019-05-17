@@ -102,7 +102,7 @@ public class MsgCenter {
 			} else if (m.getInteger("MsgType").equals(MsgCodeEnum.MSGTYPE_SYS.getCode())) {// 系统消息
 				m.put("Type", MsgTypeEnum.SYS.getType());
 			} else if (m.getInteger("MsgType").equals(MsgCodeEnum.MSGTYPE_RECALLED.getCode())) { // 撤回消息
-
+				m.put("Type", MsgTypeEnum.CALLBACK.getType());	
 			} else {
 				LOG.info("Useless msg");
 			}
@@ -151,6 +151,9 @@ public class MsgCenter {
 							} else if (msg.getType().equals(MsgTypeEnum.MEDIA.getType())) { // 多媒体消息
 								String result = msgHandler.mediaMsgHandle(msg);
 								MessageTools.sendMsgById(result, core.getMsgList().get(0).getFromUserName());
+							}else if (msg.getType().equals(MsgTypeEnum.CALLBACK.getType())) { // 撤销消息
+								msgHandler.textMsgHandle(msg);
+								//MessageTools.sendMsgById(result, core.getMsgList().get(0).getFromUserName());
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
