@@ -48,9 +48,19 @@ public class BaseMsg implements Serializable {
 	private String statusNotifyUserName;
 	/** 消息发送者ID **/
 	private String fromUserName;
+	/** 群聊实际发送者ID**/
+	private String realFrom;
 	private String oriContent;
 	private String fileSize;
 
+	public String getRealFrom() {
+		return realFrom;
+	}
+	
+	public void setRealFrom(String realFrom) {
+		this.realFrom = realFrom;
+	}
+	
 	public int getSubMsgType() {
 		return subMsgType;
 	}
