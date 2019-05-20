@@ -12,6 +12,6 @@ public class CommonUtils {
 		Objects.requireNonNull(object);
 		String remarkName = object.getString("RemarkName");
 		String nickName = object.getString("NickName");
-		return StringUtils.isNotBlank(remarkName) ? remarkName : nickName;
+		return StringUtils.isNotBlank(nickName) ? nickName : remarkName;
 	}
 }
