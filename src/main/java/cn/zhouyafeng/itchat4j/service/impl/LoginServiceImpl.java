@@ -1,5 +1,6 @@
 package cn.zhouyafeng.itchat4j.service.impl;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -13,6 +14,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.regex.Matcher;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.message.BasicNameValuePair;
@@ -31,6 +33,7 @@ import cn.zhouyafeng.itchat4j.core.MsgCenter;
 import cn.zhouyafeng.itchat4j.service.ILoginService;
 import cn.zhouyafeng.itchat4j.utils.Config;
 import cn.zhouyafeng.itchat4j.utils.MyHttpClient;
+import cn.zhouyafeng.itchat4j.utils.QRCodeUtils;
 import cn.zhouyafeng.itchat4j.utils.SleepUtils;
 import cn.zhouyafeng.itchat4j.utils.enums.ResultEnum;
 import cn.zhouyafeng.itchat4j.utils.enums.RetCodeEnum;
@@ -130,6 +133,21 @@ public class LoginServiceImpl implements ILoginService {
 
 	@Override
 	public boolean getQR(String qrPath) {
+		if(StringUtils.isBlank(qrPath)) {
+			String qrUrl = URLEnum.QRCODE_URL.getUrl() + core.getUuid();
+			HttpEntity entity = core.getMyHttpClient().doGet(qrUrl, null, true, null);
+			try {
+				byte[] bytes = EntityUtils.toByteArray(entity); 
+				ByteArrayInputStream stream = new ByteArrayInputStream(bytes);
+				String qrdata = QRCodeUtils.decode(stream);
+				stream.close();
+				String qr = QRCodeUtils.generateQR(qrdata, 20, 20);
+				System.out.println(qr);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}  
+		}
 		qrPath = qrPath + File.separator + "QR.jpg";
 		String qrUrl = URLEnum.QRCODE_URL.getUrl() + core.getUuid();
 		HttpEntity entity = myHttpClient.doGet(qrUrl, null, true, null);
